@@ -24,17 +24,7 @@ The goal of this project is to compare the forward model to a suite of archival 
 Therefore, our null hupothesis is: the observed data is drawn from the same underlying distribution as the forward model results.
 
 
-## About Kolmogorov-simirnov Test
 
-K-S test is a nonparametric statistical test method for continuous distribution:
-1.Single sample test
-Example code: ks.test(data, distribution, parameter)
-Such as : ks.test(x.”pgamma”,3,2)
-
-2.Double sample test
-Example code: ks.test(data1, data2)
-
-Equation: 
 
 
 
