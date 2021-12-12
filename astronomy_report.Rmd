@@ -27,21 +27,32 @@ Therefore, our null hupothesis is: the observed data is drawn from the same unde
 ## About Kolmogorov-smirnov Test 
 
 K-S test is a nonparametric statistical test method for continuous distribution:
-1.Single sample test
-   Example code: ks.test(data, distribution, parameter)
-                Such as : ks.test(x.”pgamma”,3,2)
-2.Double sample test
-   Example code: ks.test(data1, data2)
 
-![Equation:](k-s eq1.png){#id .class width=20% height=10%}
+1.Single sample test
+
+Example code: ks.test(data, distribution, parameter)
+
+Such as : ks.test(x.”pgamma”,3,2)
+
+2.Double sample test:
+Example code: ks.test(data1, data2)
+
+Equation:
+![](k-s eq1.png){#id .class width=20% height=10%}
+
 B(t): Brownian Bridge
-![Equation:](k-s eq2.png){#id .class width=20% height=10%}
+
+Also:
+
+![](k-s eq2.png){#id .class width=20% height=10%}
+
 
 ## Limitations of K-S Test
 
 1. Continuous distribution
 
 2. Nonparametric test method
+
 
 ## Kullback-Leibler Divergence & Jensen-Shannon Divergence
 
@@ -51,31 +62,62 @@ K-L Divergence: Measure the distance in probability distribution space, but the 
 J-S Divergence: Variant of K-L divergence which solves the problem of asymmetry of KL divergence. 
 
 ## J-S Divergence
-![Equation:](j-s eq1.png){#id .class width=20% height=10%}
 
-![Where:](j-s eq2.png){#id .class width=20% height=10%}
+Equation:
 
-![Discrete: also could be written as::](j-s eq3.png){#id .class width=20% height=10%}
+![](j-s eq1.png){#id .class width=20% height=10%}
+
+Where:
+
+![](j-s eq2.png){#id .class width=20% height=10%}
+
+Discrete: also could be written as: 
+
+![](j-s eq3.png){#id .class width=20% height=10%}
+
 Characteristics: 1. Symmetric.
+
                  2. Range: [0,1]
+
+
+
+
 
 ## Codes of J-S Divergence
 
 Discrete variables:
+
 import numpy as np
+
 import scipy.stats
 def JS_divergence(p,q)
+
 M=(p+q)/2
+
 return 0.5*scipy.stats.entropy(p,M)+0.5*scipy.stats.entropy(q, M)
+
 print(JS_divergence(data1, data2))
- 
+
+
+
 Continuous variables:
+
 from scipy.stats import norm
+
 import pandas as pd
+
 def JS_div(arr1,arr2,num_bins):
+
 max0 = max(np.max(arr1),np.max(arr2))
+
 min0 = min(np.min(arr1),np.min(arr2))
+
 bins = np.linspace(min0-1e-4, max0-1e-4, num=num_bins)
+
 PDF1 = pd.cut(arr1,bins).value_counts() / len(arr1)
+
 PDF2 = pd.cut(arr2,bins).value_counts() / len(arr2)
-return JS_divergence(PDF1.values,PDF2.values)print(JS_div(data1,data2,num_bins=20))
+
+return JS_divergence(PDF1.values,PDF2.values)
+
+print(JS_div(data1,data2,num_bins=20))
